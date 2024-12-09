@@ -4,8 +4,8 @@ const redis = require("../config/redis.config");
 
 const notificationQueue = new Queue("notifications", {
   redis: {
-    host: redis.options.host,
-    port: redis.options.port,
+    host: "127.0.0.1",
+    port: 6375,
   },
 });
 
