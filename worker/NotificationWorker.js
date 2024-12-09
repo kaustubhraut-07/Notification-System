@@ -2,7 +2,7 @@
 const { Worker } = require('bullmq');
 const Notification = require("../Model/Notification");
 const  SendEmail  = require("../services/emailService");
-const sendSMS = require("../services/smsService");
+const createMessage = require("../services/smsService");
 
 const worker = new Worker("notifications", async (job) => {
   const { userId, channel, message } = job.data;
@@ -14,7 +14,7 @@ const worker = new Worker("notifications", async (job) => {
       status = await SendEmail(userId, "Notification", message);
     } else if (channel === "sms") {
       console.log("in sms");
-      status = await sendSMS(userId, message);
+      status = await createMessage(userId, message);
     }
 
     await Notification.create({ userId, channel, message, status });
