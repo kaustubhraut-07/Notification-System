@@ -1,31 +1,3 @@
-// const nodemailer = require("nodemailer");
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   host: "smtp.gmail.com",
-//   port: 587,
-//   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASS,
-//   },
-// });
-
-// module.exports = async (userId, subject, message) => {
-//   const mailOptions = {
-//     from: process.env.EMAIL_USER,
-//     to: userId,
-//     subject,
-//     text: message,
-//   };
-
-//   try {
-//     await transporter.sendMail(mailOptions);
-//     return "success";
-//   } catch (error) {
-//     console.error(`Failed to send email: ${error.message}`);
-//     return "failure";
-//   }
-// };
 
 
 
@@ -44,12 +16,15 @@ const transporter = nodemailer.createTransport({
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 console.log("emnail codem");
-module.exports = async (userId, subject, message) => {
+
+
+ async function SendEmail (userId, subject, message) {
+  console.log(userId, subject, message , "in email code functuion");
   if (!isValidEmail(userId)) {
     console.error("Invalid email address provided.");
     return "failure";
   }
-
+  console.log("in the email code function")
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: userId,
@@ -65,3 +40,5 @@ module.exports = async (userId, subject, message) => {
     return "failure";
   }
 };
+
+module.exports = SendEmail;

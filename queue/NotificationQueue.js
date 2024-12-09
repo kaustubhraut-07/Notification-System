@@ -1,23 +1,16 @@
-const Queue = require("bull");
-console.log("queue");
+
+const { Queue } = require('bullmq');  
 const notificationQueue = new Queue("notifications", {
-  redis: {
+  connection: {
     host: "127.0.0.1",
-    port: 6375,  
-  },
-  // defaultJobOptions: {
-  //   attempts: 5,
-  //   backoff: {
-  //     type: "exponential",
-  //     delay: 5000,
-  //   },
-  //   removeOnComplete: true,
-  //   removeOnFail: false,
-  // },
+    port: 6379,
+  }
 });
-notificationQueue.on("active" , (job) => {
+
+
+notificationQueue.on("active", (job) => {
   console.log(`Job ${job.id} is active`);
-})
+});
 
 notificationQueue.on("error", (error) => {
   console.error("Queue error:", error);
