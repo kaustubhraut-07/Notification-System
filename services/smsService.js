@@ -12,7 +12,7 @@ async function createMessage() {
     body: "Testing message from my code",
     // from: "+15017122661",
     messagingServiceSid: process.env.SID,
-    to: "+919011686021",
+    to: "+91",
   });
 
   console.log(message.body);
